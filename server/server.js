@@ -37,7 +37,6 @@ io.on('connection', (socket)=>{
     console.log('server recieved new message from client')
     console.log(message)
 
-    console.log('newMessage sent to everytone');
     io.emit('newMessage', {
       text: message.text,
       from: message.from,
