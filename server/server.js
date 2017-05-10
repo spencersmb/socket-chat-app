@@ -18,7 +18,31 @@ io.on('connection', (socket)=>{
 
   socket.on('disconnect', (socket)=>{
     console.log('user disconnected');
-  
+  })
+
+  socket.emit('newEmail', {data: 'email data'})
+
+  socket.on('createEmail', (email) => {
+    console.log('server recieved email')
+    console.log(email)
+  })
+
+  socket.emit('newMessage', {
+    text: 'emiting new message from the server',
+    from: 'spencer',
+    createdAt: 12323451
+  })
+
+  socket.on('createMessage', (message) => {
+    console.log('server recieved new message from client')
+    console.log(message)
+
+    console.log('newMessage sent to everytone');
+    io.emit('newMessage', {
+      text: message.text,
+      from: message.from,
+      createdAt: message.createdAt
+    })
   })
   
 })
